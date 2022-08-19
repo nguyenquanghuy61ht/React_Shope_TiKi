@@ -11,7 +11,8 @@ import productApi from "api/productApi";
 import { useState } from "react";
 import ProductSketonList from "../components/ProductSketonList";
 import ProductList from "../components/ProductList";
-import ProductSort from "../components/ProducrtSort"
+import ProductSort from "../components/ProducrtSort";
+import ProductFilter from "../components/ProductFilter";
 
 ListPage.propTypes = {};
 const useStyle = makeStyles((theme) => ({
@@ -22,15 +23,13 @@ const useStyle = makeStyles((theme) => ({
   right: {
     flex: "1 1 0",
   },
-  pagination:{
-    display:"flex",
-    flexFlow:'row nowrap',
-    justifyContent:'center',
-    marginTop:'20px',
-    paddingBottom:'20px'
-
-
-  }
+  pagination: {
+    display: "flex",
+    flexFlow: "row nowrap",
+    justifyContent: "center",
+    marginTop: "20px",
+    paddingBottom: "20px",
+  },
 }));
 function ListPage(props) {
   const classes = useStyle();
@@ -44,7 +43,7 @@ function ListPage(props) {
   const [filters, setFilters] = useState({
     _page: 1,
     _limit: 12,
-    _sort:"salePrice:ASC"
+    _sort: "salePrice:ASC",
   });
   useEffect(() => {
     (async () => {
@@ -60,31 +59,36 @@ function ListPage(props) {
     })();
   }, [filters]);
 
-  const handlePageChange=(e,page)=>{
-    setFilters(prevFilter=>(
-      {
-        ...prevFilter,
-        _page:page
+  const handlePageChange = (e, page) => {
+    setFilters((prevFilter) => ({
+      ...prevFilter,
+      _page: page,
+    }));
+  };
+  const hanleChangeSort = (valueSort) => {
+    setFilters((prevFilter) => ({
+      ...prevFilter,
+      _sort: valueSort,
+    }));
+  };
 
-      }
-    ))
-  }
-  const hanleChangeSort=(valueSort)=>{
-    setFilters(prevFilter=>(
-      {
-        ...prevFilter,
-        _sort:valueSort
-
-      }
-    ))
-
-  }
+  const handleFiltersChange = (newFilters) => {
+    setFilters((prevFilter) => ({
+      ...prevFilter,
+      ...newFilters,
+    }));
+  };
+  const handlegetAll = (newFilters) => {
+    setFilters(newFilters);
+  };
   return (
     <Box>
       <Container>
         <Grid container spacing={1}>
           <Grid item className={classes.left}>
-            <Paper elevation={0}>Left Colum</Paper>
+            <Paper elevation={0}>
+              <ProductFilter filters={filters} onChangeAll={handlegetAll} onChange={handleFiltersChange} />
+            </Paper>
           </Grid>
           <Grid item className={classes.right}>
             <Paper elevation={0}>

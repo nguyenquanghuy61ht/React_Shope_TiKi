@@ -1,4 +1,4 @@
-import axiosClient from "./AxiosClient";
+import axiosClient from "./axiosClient";
 
 const categoryApi = {
   //get tat ca bao nhieu trang ,search....
