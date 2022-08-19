@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import PropTypes from "prop-types";
 import {
   Box,
   Container,
@@ -12,6 +11,7 @@ import productApi from "api/productApi";
 import { useState } from "react";
 import ProductSketonList from "../components/ProductSketonList";
 import ProductList from "../components/ProductList";
+import ProductSort from "../components/ProducrtSort"
 
 ListPage.propTypes = {};
 const useStyle = makeStyles((theme) => ({
@@ -44,6 +44,7 @@ function ListPage(props) {
   const [filters, setFilters] = useState({
     _page: 1,
     _limit: 12,
+    _sort:"salePrice:ASC"
   });
   useEffect(() => {
     (async () => {
@@ -68,6 +69,16 @@ function ListPage(props) {
       }
     ))
   }
+  const hanleChangeSort=(valueSort)=>{
+    setFilters(prevFilter=>(
+      {
+        ...prevFilter,
+        _sort:valueSort
+
+      }
+    ))
+
+  }
   return (
     <Box>
       <Container>
@@ -77,6 +88,10 @@ function ListPage(props) {
           </Grid>
           <Grid item className={classes.right}>
             <Paper elevation={0}>
+              <ProductSort
+                currentSort={filters._sort}
+                onChange={hanleChangeSort}
+              />
               {loading ? (
                 <ProductSketonList length={12} />
               ) : (
