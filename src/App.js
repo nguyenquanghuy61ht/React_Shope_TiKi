@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Todo from './Features/Todo';
 import Album from './Features/Album';
 import Home from './Features/Home';
+import ProductFeature from 'Features/Product/index';
 function App() {
   return (
     <div className="App">
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/todos" element={<Todo />} />
         <Route path="/albums" element={<Album />} />
+        <Route path="/products/*" element={<ProductFeature />} />
       </Routes>
     </div>
   );
