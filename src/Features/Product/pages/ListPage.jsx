@@ -13,6 +13,7 @@ import ProductSketonList from "../components/ProductSketonList";
 import ProductList from "../components/ProductList";
 import ProductSort from "../components/ProducrtSort";
 import ProductFilter from "../components/ProductFilter";
+import FilterViewer from "../components/FilterViewer";
 
 ListPage.propTypes = {};
 const useStyle = makeStyles((theme) => ({
@@ -81,6 +82,9 @@ function ListPage(props) {
   const handlegetAll = (newFilters) => {
     setFilters(newFilters);
   };
+  const setNewFilters = (newFilters) => {
+    setFilters(newFilters);
+  };
   return (
     <Box>
       <Container>
@@ -96,6 +100,7 @@ function ListPage(props) {
                 currentSort={filters._sort}
                 onChange={hanleChangeSort}
               />
+              <FilterViewer filters={filters} onChange={setNewFilters}/>
               {loading ? (
                 <ProductSketonList length={12} />
               ) : (
