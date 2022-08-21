@@ -14,7 +14,8 @@ import ProductList from "../components/ProductList";
 import ProductSort from "../components/ProducrtSort";
 import ProductFilter from "../components/ProductFilter";
 import FilterViewer from "../components/FilterViewer";
-
+import { useNavigate, useParams } from "react-router-dom";
+import queryString from "query-string";
 ListPage.propTypes = {};
 const useStyle = makeStyles((theme) => ({
   root: {},
@@ -33,6 +34,10 @@ const useStyle = makeStyles((theme) => ({
   },
 }));
 function ListPage(props) {
+  const navigate = useNavigate();
+  const search = useParams();
+  const queryParams = queryString.parse(search['*']);
+  console.log(queryParams);
   const classes = useStyle();
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -41,11 +46,21 @@ function ListPage(props) {
     page: 1,
     total: 12,
   });
+  // const [filters, setFilters] = useState({
+  //   _page: 1,
+  //   _limit: 12,
+  //   _sort: "salePrice:ASC",
+  // });
   const [filters, setFilters] = useState({
-    _page: 1,
-    _limit: 12,
-    _sort: "salePrice:ASC",
+    ...queryParams,
+    _page: queryParams._page || 1,
+    _limit: queryParams._limit || 12,
+    _sort: queryParams._sort || "salePrice:ASC",
   });
+
+  useEffect(() => {
+    navigate(queryString.stringify(filters));
+  }, [navigate, filters]);
   useEffect(() => {
     (async () => {
       try {
@@ -91,7 +106,11 @@ function ListPage(props) {
         <Grid container spacing={1}>
           <Grid item className={classes.left}>
             <Paper elevation={0}>
-              <ProductFilter filters={filters} onChangeAll={handlegetAll} onChange={handleFiltersChange} />
+              <ProductFilter
+                filters={filters}
+                onChangeAll={handlegetAll}
+                onChange={handleFiltersChange}
+              />
             </Paper>
           </Grid>
           <Grid item className={classes.right}>
@@ -100,7 +119,7 @@ function ListPage(props) {
                 currentSort={filters._sort}
                 onChange={hanleChangeSort}
               />
-              <FilterViewer filters={filters} onChange={setNewFilters}/>
+              <FilterViewer filters={filters} onChange={setNewFilters} />
               {loading ? (
                 <ProductSketonList length={12} />
               ) : (
