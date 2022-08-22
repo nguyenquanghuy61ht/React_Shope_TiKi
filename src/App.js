@@ -4,6 +4,7 @@ import Todo from './Features/Todo';
 import Album from './Features/Album';
 import Home from './Features/Home';
 import ProductFeature from 'Features/Product/index';
+import DetailPage from 'Features/Product/pages/DetailPage';
 function App() {
   return (
     <div className="App">
@@ -15,6 +16,7 @@ function App() {
         <Route path="/todos" element={<Todo />} />
         <Route path="/albums" element={<Album />} />
         <Route path="/products/*" element={<ProductFeature />} />
+        <Route path="/product/:productId" element={<DetailPage />} />
       </Routes>
     </div>
   );

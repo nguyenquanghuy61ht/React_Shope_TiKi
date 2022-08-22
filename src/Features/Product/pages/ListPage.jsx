@@ -16,6 +16,7 @@ import ProductFilter from "../components/ProductFilter";
 import FilterViewer from "../components/FilterViewer";
 import { useNavigate, useParams } from "react-router-dom";
 import queryString from "query-string";
+import { useMemo } from "react";
 ListPage.propTypes = {};
 const useStyle = makeStyles((theme) => ({
   root: {},
@@ -36,7 +37,9 @@ const useStyle = makeStyles((theme) => ({
 function ListPage(props) {
   const navigate = useNavigate();
   const search = useParams();
-  const queryParams = queryString.parse(search['*']);
+  const queryParams = useMemo(() => {
+    return queryString.parse(search["*"]);
+  }, [search]);
   console.log(queryParams);
   const classes = useStyle();
   const [productList, setProductList] = useState([]);
