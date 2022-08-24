@@ -23,15 +23,22 @@ export const login = createAsyncThunk("user/login", async (payload) => {
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    current: JSON.parse(localStorage.getItem(storageKeys.USER))||{},
+    current: JSON.parse(localStorage.getItem(storageKeys.USER)) || {},
+    openform: false,
     settings: {},
   },
   reducers: {
-    logout(state){
-      localStorage.removeItem(storageKeys.USER)
+    OpenForm(state) {
+      state.openform = true;
+    },
+    hideForm(state) {
+      state.openform = false;
+    },
+    logout(state) {
+      localStorage.removeItem(storageKeys.USER);
       localStorage.removeItem(storageKeys.TOKEN);
-      state.current={};
-    }
+      state.current = {};
+    },
   },
   // khin cai thunk thanh cong thi ca[p nhat vao redux
   extraReducers: {
@@ -46,6 +53,6 @@ const userSlice = createSlice({
   },
 });
 
-const {actions, reducer } = userSlice;
-export const {logout} =actions
+const { actions, reducer } = userSlice;
+export const { logout, OpenForm,hideForm } = actions;
 export default reducer; //default export

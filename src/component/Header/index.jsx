@@ -14,14 +14,23 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Register from "../../Features/Auth/components/Register";
-import { IconButton } from "../../../node_modules/@mui/material/index";
+import {
+  Badge,
+  IconButton,
+  Paper,
+  Popover,
+} from "../../../node_modules/@mui/material/index";
 import {
   AccountCircle,
+  CheckCircle,
   Close,
 } from "../../../node_modules/@mui/icons-material/index";
 import Login from "Features/Auth/components/Login/index";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "Features/Auth/userSlice";
+import { hideForm, logout, OpenForm } from "Features/Auth/userSlice";
+import { cartItemsCountSelector } from "Features/Cart/selectors";
+import { useNavigate } from "../../../node_modules/react-router-dom/index";
+import { hideMiniCart } from "Features/Cart/cartSlice";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 0,
@@ -40,26 +49,45 @@ const useStyles = makeStyles((theme) => ({
     top: "10px",
     right: "15px",
   },
+  popover: {
+    zIndex: 100,
+    minWidth: "100px",
+    position: "absolute",
+    top: "73%",
+    right: "34px",
+    padding: "10px",
+  },
+  title: {
+    display: "flex",
+    alignItems: "center",
+  },
+  Button: {
+    marginTop: "15px",
+    width: "100%",
+  },
 }));
 const MODE = {
   LOGIN: "login",
   REGISTER: "register",
 };
 export default function Header() {
+  const openform = useSelector((state) => state.user.openform);
+  const showMiniCart = useSelector((state) => state.cart.showMiniCart);
+  const CartItemCount = useSelector(cartItemsCountSelector);
   const loggedInUser = useSelector((state) => state.user.current);
   const isLoggedIn = !!loggedInUser.id;
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
   const [mode, setMode] = useState(MODE.LOGIN);
   const dispatch = useDispatch();
   const [anchorEl, setAnchrEl] = useState();
   const opens = Boolean(anchorEl);
   const handleClickOpen = () => {
-    setOpen(true);
+    dispatch(OpenForm());
   };
 
   const handleClose = (event, reason) => {
     if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
-      setOpen(false);
+      dispatch(hideForm());
     }
   };
   const handleUserClick = (e) => {
@@ -72,6 +100,18 @@ export default function Header() {
   const handleLogoutClick = () => {
     handleCloseMenu();
     dispatch(action);
+    navigate("/products");
+  };
+  const handleNavigateCart = () => {
+    if (isLoggedIn) {
+      navigate("/cart");
+    } else {
+      dispatch(OpenForm());
+    }
+  };
+  const handleToCart = () => {
+    navigate("/cart");
+    dispatch(hideMiniCart());
   };
 
   const classes = useStyles();
@@ -109,6 +149,40 @@ export default function Header() {
                 <AccountCircle />
               </IconButton>
             )}
+            {isLoggedIn && (
+              <IconButton
+                size="large"
+                aria-label="show 4 new mails"
+                color="inherit"
+                onClick={handleNavigateCart}
+              >
+                <Badge badgeContent={CartItemCount} color="error">
+                  <ShoppingCartIcon />
+                </Badge>
+              </IconButton>
+            )}
+
+            {showMiniCart && (
+              <Paper className={classes.popover}>
+                <Box className={classes.title}>
+                  <IconButton>
+                    <CheckCircle color="success" />
+                  </IconButton>
+                  <Typography variant="body1">
+                    Thêm vào giỏ hàng thành công
+                  </Typography>
+                </Box>
+                <Button
+                  onClick={handleToCart}
+                  variant="contained"
+                  color="error"
+                  className={classes.Button}
+                  sx={{ fontSize: "12px" }}
+                >
+                  Xem giỏ hàng và thanh toán
+                </Button>
+              </Paper>
+            )}
           </Toolbar>
         </AppBar>
         <Menu
@@ -124,7 +198,7 @@ export default function Header() {
           <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
         </Menu>
         <Dialog
-          open={open}
+          open={openform}
           sx={{ maxWidth: "450px", mx: "auto" }}
           onClose={handleClose}
         >
