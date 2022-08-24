@@ -81,10 +81,10 @@ function DetailPage() {
       <Container>
         <Paper elevation={0}>
           <Grid container className={classes.row}>
-            <Grid item className={classes.left}>
+            <Grid item className={classes.left} xs={12} md={4}>
               <ProducThumbnail product={product} />
             </Grid>
-            <Grid item className={classes.right}>
+            <Grid item className={classes.right} xs={12} md={8}>
               <ProductInfo product={product} />
               <AddToCartForm onSubmit={handleAddToCartSubmit} error={error} />
             </Grid>

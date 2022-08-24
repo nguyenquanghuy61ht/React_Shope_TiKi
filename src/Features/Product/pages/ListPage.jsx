@@ -105,7 +105,7 @@ function ListPage(props) {
     <Box>
       <Container>
         <Grid container spacing={1}>
-          <Grid item className={classes.left}>
+          <Grid item className={classes.left} xs={12}  md={3}>
             <Paper elevation={0}>
               <ProductFilter
                 filters={filters}
@@ -114,7 +114,7 @@ function ListPage(props) {
               />
             </Paper>
           </Grid>
-          <Grid item className={classes.right}>
+          <Grid item className={classes.right} xs={12} md={9}>
             <Paper elevation={0}>
               <ProductSort
                 currentSort={filters._sort}
