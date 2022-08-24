@@ -118,7 +118,10 @@ export default function Header() {
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static">
+        <AppBar
+          position="static"
+          sx={{ backgroundColor: "#1A94FF", padding: "0 25px" }}
+        >
           <Toolbar>
             <ShoppingCartIcon className={classes.menuButton} />
             <Typography
@@ -130,12 +133,6 @@ export default function Header() {
                 Tiki
               </Link>
             </Typography>
-            <NavLink className={classes.link} to="/todos">
-              <Button color="inherit">Todos</Button>
-            </NavLink>
-            <NavLink className={classes.link} to="/albums">
-              <Button color="inherit">Albums</Button>
-            </NavLink>
             <NavLink className={classes.link} to="/products">
               <Button color="inherit">Product</Button>
             </NavLink>

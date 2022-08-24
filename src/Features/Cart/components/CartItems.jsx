@@ -83,7 +83,7 @@ function CartItems({ product }) {
     dispatch(action);
   };
   return (
-    <Box className={classes.Product} key={product.product.id}>
+    <Box className={classes.Product}>
       <img src={thumbnailUrl} alt="" />
       <Box className={classes.productDetail}>
         <Box component="div" className={classes.infoProduct}>
@@ -109,7 +109,7 @@ function CartItems({ product }) {
         <Typography className={classes.Price}>
           <Box
             component="span"
-            fontsize="16px"
+            fontSize="16px"
             fontWeight="bold"
             mr={1}
             className={classes.salePrice}

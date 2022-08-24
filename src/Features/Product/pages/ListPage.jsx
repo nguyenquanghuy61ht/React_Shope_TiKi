@@ -40,7 +40,6 @@ function ListPage(props) {
   const queryParams = useMemo(() => {
     return queryString.parse(search["*"]);
   }, [search]);
-  console.log(queryParams);
   const classes = useStyle();
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -68,7 +67,6 @@ function ListPage(props) {
     (async () => {
       try {
         const { data, pagination } = await productApi.getAll(filters);
-        console.log(data);
         setProductList(data);
         setPagination(pagination);
       } catch (error) {

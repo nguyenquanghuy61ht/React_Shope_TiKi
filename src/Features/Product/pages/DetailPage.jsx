@@ -48,7 +48,6 @@ function DetailPage() {
   const queryParams = Number(search.productId);
   const classes = useStyle();
   const { product, loading } = useProductDetail(queryParams);
-  console.log(product);
   const dispatch = useDispatch();
   if (loading) {
     return (
@@ -65,7 +64,6 @@ function DetailPage() {
       setError(false);
     } else {
       setError(false);
-      console.log("form sumit", Number.parseInt(formValues.quantity));
       const action = addTocart({
         id: product.id,
         product,

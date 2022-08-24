@@ -44,12 +44,16 @@ function CartFeature(props) {
           <Grid container className={classes.row}>
             <Grid item className={classes.left}>
               {ListCartProduct.map((product) => (
-                <CartItems product={product} />
+                <CartItems product={product} key={product.id} />
               ))}
             </Grid>
             <Grid item className={classes.right}>
               <CartTotalPrice />
-              <Button variant="contained" sx={{width:"100%",marginTop:"20px"}}color="error">
+              <Button
+                variant="contained"
+                sx={{ width: "100%", marginTop: "20px" }}
+                color="error"
+              >
                 Tiến hành đặt hàng
               </Button>
             </Grid>
