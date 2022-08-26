@@ -1,4 +1,6 @@
 import axios from "axios";
+import jwtDecode from "jwt-decode";
+import { useSelector } from "react-redux";
 const axiosClient = axios.create({
   baseURL: "https://api.ezfrontend.com/",
   headers: {
@@ -7,9 +9,20 @@ const axiosClient = axios.create({
 });
 //Interceptor
 // Add a request interceptor
+
 axiosClient.interceptors.request.use(
   function (config) {
     // Do something before request is sent
+    // if (
+    //   config.url.indexOf("/auth/local/register") >= 0 ||
+    //   config.url.indexOf("/auth/local") >= 0 //  config.url.indexOf("/auth/refresh") >= 0
+    // ) {
+    //   return config;
+    // }
+    // config.headers.Authorization = `Bearer ${localStorage.getItem(
+    //   "access_token"
+    // )}`;
+
     return config;
   },
   function (error) {
