@@ -25,23 +25,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 function ProductMenu() {
   const classes = useStyles();
-  const { pathname } = useLocation();
-
   return (
     <Box component="ul" className={classes.root}>
       <li>
         <Link component={NavLink} to="Description">
-          Description
+          Mô tả
         </Link>
       </li>
       <li>
         <Link component={NavLink} to="additional">
-          Additional Infomation
+          Thông tin bổ sung
         </Link>
       </li>
       <li>
         <Link component={NavLink} to="reviews">
-          Reviews
+          Đánh giá
         </Link>
       </li>
     </Box>

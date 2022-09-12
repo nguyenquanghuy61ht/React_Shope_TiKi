@@ -134,11 +134,11 @@ export default function Header() {
               </Link>
             </Typography>
             <NavLink className={classes.link} to="/products">
-              <Button color="inherit">Product</Button>
+              <Button color="inherit">Sản phẩm</Button>
             </NavLink>
             {!isLoggedIn && (
               <Button color="inherit" onClick={handleClickOpen}>
-                Login
+                Đăng Nhập
               </Button>
             )}
             {isLoggedIn && (
@@ -191,8 +191,8 @@ export default function Header() {
             "aria-labelledby": "basic-button",
           }}
         >
-          <MenuItem onClick={handleCloseMenu}>My account</MenuItem>
-          <MenuItem onClick={handleLogoutClick}>Logout</MenuItem>
+          <MenuItem onClick={handleCloseMenu}>Tài khoản</MenuItem>
+          <MenuItem onClick={handleLogoutClick}>Đăng xuất</MenuItem>
         </Menu>
         <Dialog
           open={openform}
@@ -209,7 +209,7 @@ export default function Header() {
                   <Register closeDialog={handleClose} />
                   <Box textAlign="center">
                     <Button color="primary" onClick={() => setMode(MODE.LOGIN)}>
-                      Already have an acount. Login here
+                      Bạn đã có tài khoản. Đăng nhập ngay
                     </Button>
                   </Box>
                 </>
@@ -222,7 +222,7 @@ export default function Header() {
                       color="primary"
                       onClick={() => setMode(MODE.REGISTER)}
                     >
-                      Dont have an acount. Rigister here
+                      Bạn chưa có tài khoản. Đăng ký ngay
                     </Button>
                   </Box>
                 </>

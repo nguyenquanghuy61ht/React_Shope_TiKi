@@ -1,12 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-ProductAdditional.propTypes = {
-    
-};
-
-function ProductAdditional(props) {
-    return <div>ProductAdditional</div>;
+function ProductAdditional() {
+    return <h2>Thông tin bổ sung </h2>;
 }
 
 export default ProductAdditional;

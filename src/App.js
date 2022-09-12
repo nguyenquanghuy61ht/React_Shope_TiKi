@@ -4,6 +4,7 @@ import Home from './Features/Home';
 import ProductFeature from 'Features/Product/index';
 import DetailPage from 'Features/Product/pages/DetailPage';
 import CartFeature from 'Features/Cart/index';
+import Footer from 'component/Footer/footer';
 function App() {
   return (
     <div className="App">
@@ -16,6 +17,9 @@ function App() {
         <Route path="/product/:productId/*" element={<DetailPage />} />
         <Route path="/cart" element={<CartFeature />} />
       </Routes>
+      <footer>
+        <Footer/>
+      </footer>
     </div>
   );
 }

@@ -1,12 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
-ProductReviews.propTypes = {
-    
-};
 
 function ProductReviews(props) {
-    return <div>ProductReviews</div>;
+    return <h2>Đánh giá sản phẩm</h2>;
 }
 
 export default ProductReviews;

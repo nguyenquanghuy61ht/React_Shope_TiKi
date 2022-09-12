@@ -31,21 +31,20 @@ function RegisterForm(props) {
       retypePassword: "",
     },
   });
-  const handleSubmits =async (value) => {
+  const handleSubmits = async (value) => {
     const { onSubmit } = props;
     if (onSubmit) {
       await onSubmit(value);
     }
-    
   };
   return (
     <div className={classes.root}>
-      {isSubmitting && <LinearProgress/>}
+      {isSubmitting && <LinearProgress />}
       <Avatar sx={{ mx: "auto", mb: 2, bgcolor: "secondary.main" }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h3" variant="h5" className={classes.title}>
-        Create An Acount
+        Tạo tài khoản mới
       </Typography>
       <form onSubmit={handleSubmit(handleSubmits)}>
         <InputField
@@ -129,12 +128,12 @@ function RegisterForm(props) {
         <Button
           type="submit"
           variant="contained"
-          sx={{ mt: 2,marginBottom:"15px"}}
+          sx={{ mt: 2, marginBottom: "15px" }}
           fullWidth
           color="primary"
           disabled={isSubmitting}
         >
-          Create an account
+          Đăng ký
         </Button>
       </form>
     </div>

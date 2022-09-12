@@ -3,8 +3,7 @@ import {
   Box,
   FormControl,
   IconButton,
-  OutlinedInput,
-  Typography,
+  TextField,
 } from "../../../../../node_modules/@mui/material/index";
 import { Controller } from "react-hook-form";
 import {
@@ -16,13 +15,17 @@ function QuantityField(props) {
   const { form, name, label, disabled } = props;
   const { setValue } = form;
   return (
-    <FormControl variant="outlined" fullWidth margin="normal">
-      <Typography sx={{mb:"5px",ml:"14px"}}>{label}</Typography>
+    <FormControl
+      variant="outlined"
+      fullWidth
+      margin="normal"
+      sx={{ mt: "25px" }}
+    >
       <Controller
         name={name}
         control={form.control}
         render={({ field: { onChange, onBlur, value, name } }) => (
-          <Box>
+          <Box class>
             <IconButton
               onClick={() => {
                 setValue(
@@ -33,17 +36,23 @@ function QuantityField(props) {
             >
               <RemoveCircle />
             </IconButton>
-            <OutlinedInput
-              sx={{ width: "130px" }}
+            <TextField
+              sx={{ width: "100px" }}
               size="small"
               min="0"
+              max="10"
               id={name}
+              label={label}
               type="number"
+              InputLabelProps={{
+                shrink: true,
+              }}
               value={value}
               disabled={disabled}
               onChange={onChange}
               onBlur={onBlur}
             />
+
             <IconButton
               onClick={() => {
                 setValue(

@@ -43,7 +43,7 @@ function LoginForm(props) {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h3" variant="h5" className={classes.title}>
-        Sign In
+        Đăng nhập
       </Typography>
       <form onSubmit={handleSubmit(handleSubmits)}>
         <InputField
@@ -98,7 +98,7 @@ function LoginForm(props) {
           color="primary"
           disabled={isSubmitting}
         >
-          Sign In
+          Đăng nhập
         </Button>
       </form>
     </div>

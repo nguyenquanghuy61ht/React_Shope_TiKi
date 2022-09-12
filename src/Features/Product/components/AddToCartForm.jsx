@@ -25,7 +25,7 @@ function AddToCartForm({ onSubmit, error }) {
   };
   return (
     <form onSubmit={form.handleSubmit(handleSubmits)}>
-      <QuantityField name="quantity" label="Quantity" form={form} />
+      <QuantityField name="quantity" label="Số lượng" form={form} />
       {error && <Typography sx={{ml:"14px",color:"red"}} variant="body2">Bạn chưa nhập số lượng!</Typography>}
       <Button
         type="submit"
@@ -35,7 +35,7 @@ function AddToCartForm({ onSubmit, error }) {
         color="primary"
         size="large"
       >
-        Add to card
+        Thêm vào giỏ hàng
       </Button>
     </form>
   );
