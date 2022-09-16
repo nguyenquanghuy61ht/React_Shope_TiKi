@@ -5,6 +5,7 @@ import ProductFeature from 'Features/Product/index';
 import DetailPage from 'Features/Product/pages/DetailPage';
 import CartFeature from 'Features/Cart/index';
 import Footer from 'component/Footer/footer';
+
 function App() {
   return (
     <div className="App">
