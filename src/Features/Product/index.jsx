@@ -5,10 +5,10 @@ import { Box } from "../../../node_modules/@mui/material/index";
 
 ProductFeature.propTypes = {};
 
-function ProductFeature(props) {
+function ProductFeature() {
   return (
     <Box pt={4}>
-      <ListPage />
+      <ListPage  />
     </Box>
   );
 }

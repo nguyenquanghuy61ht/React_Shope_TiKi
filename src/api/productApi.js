@@ -34,5 +34,9 @@ const productApi = {
     const url = `/products/${id}`;
     return axiosClient.get(url);
   },
+  getSearch(params) {
+    const url = `/products`;
+    return axiosClient.get(url,{params});
+  },
 };
 export default productApi;

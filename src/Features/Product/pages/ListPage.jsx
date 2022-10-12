@@ -17,6 +17,7 @@ import FilterViewer from "../components/FilterViewer";
 import { useNavigate, useParams } from "react-router-dom";
 import queryString from "query-string";
 import { useMemo } from "react";
+import { useCallback, createContext, useContext } from "react";
 ListPage.propTypes = {};
 const useStyle = makeStyles((theme) => ({
   root: {},
@@ -34,7 +35,9 @@ const useStyle = makeStyles((theme) => ({
     paddingBottom: "20px",
   },
 }));
-function ListPage(props) {
+function ListPage() {
+  const UserContext = createContext();
+  const func = useContext(UserContext);
   const navigate = useNavigate();
   const search = useParams();
   const queryParams = useMemo(() => {
@@ -69,6 +72,7 @@ function ListPage(props) {
         const { data, pagination } = await productApi.getAll(filters);
         setProductList(data);
         setPagination(pagination);
+        func(setProductList)
       } catch (error) {
         console.log("Failed to fetch product list:", error);
       }
@@ -105,7 +109,7 @@ function ListPage(props) {
     <Box>
       <Container>
         <Grid container spacing={1}>
-          <Grid item className={classes.left} xs={12}  md={3}>
+          <Grid item className={classes.left} xs={12} md={3}>
             <Paper elevation={0}>
               <ProductFilter
                 filters={filters}

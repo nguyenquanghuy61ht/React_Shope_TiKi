@@ -31,6 +31,13 @@ function CartFeature(props) {
   const classes = useStyle();
   const ListCartProduct = useSelector((state) => state.cart.cartItemes);
   const CartItemCount = useSelector(cartItemsCountSelector);
+  const handlePay = () => {
+    if (ListCartProduct.length > 0) {
+      alert("Bạn đã đặt hàng thành công !");
+    } else {
+      alert("Bạn chưa có sản phẩm nào trong giỏ hàng");
+    }
+  };
   return (
     <Box pt={4} className={classes.root}>
       <Container>
@@ -53,6 +60,7 @@ function CartFeature(props) {
                 variant="contained"
                 sx={{ width: "100%", marginTop: "20px" }}
                 color="error"
+                onClick={handlePay}
               >
                 Tiến hành đặt hàng
               </Button>

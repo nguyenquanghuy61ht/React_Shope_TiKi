@@ -14,8 +14,12 @@ import Dialog from "@mui/material/Dialog";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import Register from "../../Features/Auth/components/Register";
+import Form from "react-bootstrap/Form";
+import SearchIcon from "@mui/icons-material/Search";
+import "./styles.scss";
 import {
   Badge,
+  CircularProgress,
   IconButton,
   Paper,
   Popover,
@@ -31,6 +35,8 @@ import { hideForm, logout, OpenForm } from "Features/Auth/userSlice";
 import { cartItemsCountSelector } from "Features/Cart/selectors";
 import { useNavigate } from "../../../node_modules/react-router-dom/index";
 import { hideMiniCart } from "Features/Cart/cartSlice";
+import { useEffect } from "react";
+import productApi from "api/productApi";
 const useStyles = makeStyles((theme) => ({
   root: {
     margin: 0,
@@ -71,6 +77,7 @@ const MODE = {
   REGISTER: "register",
 };
 export default function Header() {
+  const [input, setInput] = useState("");
   const openform = useSelector((state) => state.user.openform);
   const showMiniCart = useSelector((state) => state.cart.showMiniCart);
   const CartItemCount = useSelector(cartItemsCountSelector);
@@ -113,8 +120,21 @@ export default function Header() {
     navigate("/cart");
     dispatch(hideMiniCart());
   };
+  const handleChange = (e) => {
+    setInput(e.target.value.trim());
+  };
+  useEffect(() => {
+    (async () => {
+      const data = await productApi.getSearch({
+        _q: input,
+      });
+     
+    })();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [input]);
 
   const classes = useStyles();
+
   return (
     <div>
       <Box sx={{ flexGrow: 1 }}>
@@ -133,6 +153,21 @@ export default function Header() {
                 Tiki
               </Link>
             </Typography>
+            <Box>
+              <Form className="d-flex" style={{ marginRight: "20px" }}>
+                <Form.Control
+                  type="search"
+                  placeholder="Search"
+                  className=" input-search"
+                  aria-label="Search"
+                  value={input}
+                  onChange={handleChange}
+                />
+                <Button variant="contained" className="button-search ">
+                  <SearchIcon />
+                </Button>
+              </Form>
+            </Box>
             <NavLink className={classes.link} to="/products">
               <Button color="inherit">Sản phẩm</Button>
             </NavLink>
