@@ -13,7 +13,7 @@ function Login({ closeDialog }) {
       
       const action = login(value);
       const resultAction = await dispatch(action);
-      const user = unwrapResult(resultAction);
+      const user =  unwrapResult(resultAction);
       if (closeDialog) {
         closeDialog();
       }
